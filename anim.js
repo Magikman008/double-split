@@ -74,24 +74,23 @@ two
         // })
 
 
-        dots.forEach((element) => {
-            if (element.position.x <= 200) {
-                element.position.x += 1;
-            }
-        })
-        
+        // dots.forEach((element) => {
+        //     if (element.position.x <= 200) {
+        //         element.position.x += 1;
+        //     }
+        // })
+
         for (var j = 0; j < i; j++) {
-            if (holes[j - 1] == 0 && dots[j].position.x <= 200) {
-                dots[j].position.y -= 0.2;
+            if (holes[j - 1] <= 0.5 && dots[j].position.x <= 200) {
+                dots[j].position.x += 1;
+                dots[j].position.y = 350 + 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15
             }
             else if (dots[j].position.x <= 200) {
-                dots[j].position.y += 0.2;
+                dots[j].position.x += 1;
+                dots[j].position.y = 350 - 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) - 15
             }
         }
-        // list.forEach((element) => {
-        //     element.translation.x += 1;
-        // })
-        // }
+
         // if (osc >= 0.9 && isBackground) {
         //     foreground.add(earth);
         //     isBackground = false;
@@ -115,7 +114,7 @@ two
 document.getElementById("Sphere").onclick = function () {
 
     dots.push(two.makeCircle(50, centerY, 5));
-    holes.push(intRange(0, 1));
+    holes.push(Math.random());
     i++;
 };
 

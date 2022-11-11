@@ -5,6 +5,9 @@ var elem = document.getElementById('draw-animation');
 var centerX = 0;
 var centerY = 0;
 var offsetY = elem.offsetTop;
+var refresh = window.setInterval(add, 1000 / document.getElementById("range").value);
+
+clearInterval(refresh);
 
 // window.onresize = function (event) {
 //     two.update();
@@ -28,7 +31,6 @@ window.onload = function () {
 
     var linecenter = two.makeLine(200, centerY - 20, 200, centerY + 20);
     styleLine(linecenter);
-    console.log(linecenter);
 
     var linedown = two.makeLine(200, centerY + 40, 200, centerY * 2);
     styleLine(linedown);
@@ -40,6 +42,7 @@ window.onload = function () {
         var glinevert = two.makeLine(890, i * (centerY * 2 - 1) / 40, 900, i * (centerY * 2 - 1) / 40);
         styleLine(glinevert);
     }
+    // refresh = window.setInterval(add, 1000/document.getElementById("range").value);
 };
 
 function intRange(min, max) {
@@ -50,27 +53,63 @@ function intRange(min, max) {
 var two = new Two({ fitted: true }).appendTo(elem);
 var dots = Array();
 var holes = Array();
+var cords = Array();
 var i = 0;
 
 two
     .bind('update', function (frameCount) {
         for (var j = 0; j < i; j++) {
-            if (holes[j - 1] <= 0.5 && dots[j].position.x <= 200) {
-                dots[j].position.x += 1;
-                dots[j].position.y = 350 + 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15
+            if (dots[j].position.x < 200) {
+                if (holes[j - 1] <= 0.5) {
+                    dots[j].position.x += 3;
+                    dots[j].position.y = 350 + 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15
+                }
+                else {
+                    dots[j].position.x += 3;
+                    dots[j].position.y = 350 - 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) - 15
+                }
             }
-            else if (dots[j].position.x <= 200) {
-                dots[j].position.x += 1;
-                dots[j].position.y = 350 - 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) - 15
+            else if (dots[j].position.x < 850) {
+                if (holes[j - 1] <= 0.5) {
+                    dots[j].position.x += 3;
+                    dots[j].position.y = 380 - (cords[j] - 380) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1300))
+                }
+                else {
+                    dots[j].position.x += 3;
+                    dots[j].position.y = 320 + (cords[j] - 320) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1300))
+                }
             }
         }
 
     })
     .play();
 
-document.getElementById("Sphere").onclick = function () {
+document.getElementById("Sphere").onclick = add;
 
+function add() {
     dots.push(two.makeCircle(50, centerY, 5));
     holes.push(Math.random());
+    cords.push(intRange(0, 650))
     i++;
 };
+
+document.getElementById("clear").onclick = function () {
+    dots.forEach(element => {
+        element.remove();
+    });
+};
+
+document.getElementById("start").onclick = function () {
+    clearInterval(refresh);
+    refresh = window.setInterval(add, 1000 / document.getElementById("range").value);
+};
+
+document.getElementById("stop").onclick = function () {
+    clearInterval(refresh);
+};
+
+document.getElementById("range").oninput = function () {
+    clearInterval(refresh);
+    rangeValue.innerText = this.value
+    refresh = window.setInterval(add, 1000 / this.value);
+}

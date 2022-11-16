@@ -1,0 +1,102 @@
+// подключить библиотеки
+
+
+// объявить параметры, ввод которых не требуется
+var y = 10
+var x = 1000
+
+var last_id = 0
+var eps = 0.001
+
+
+// ввод параметров
+var d_del_lambda = 5
+var L = 5
+var distance = 80
+var count = 100
+
+
+// объявление словаря и массива
+let arr = new Array(x)
+for (let i = 0; i < arr.length; i++)
+    arr[i] = 0
+console.log(arr)
+
+var dict_poins = new Object()
+
+
+
+// предварительные вычисления
+A = L / (Math.PI ** 2 * d_del_lambda)
+
+
+
+
+// генератор интерференционной картины
+function interfernce_pattern_generator(min, max, id)
+{
+    // получение рандомного числа из встроенного генератора рандомных чисел
+    var xx = Math.floor(Math.random() * (max - min + 1))
+
+    // рассчет y_X
+    var y_X = (A / xx ** 2) * (Math.sin(L / (Math.PI * d_del_lambda * xx))) ** 2
+
+
+    // домножить на коэффициент 
+    var x_center = (max - min + 1) / 2
+    var k = x_center / A * (max - min + 1)
+
+    y_X *= k
+
+    // обработать знак относительно центра входных данных
+    var sign = Math.round(1 - 0.5 + Math.random() * (2))
+    
+    var ans = 0
+    if (sign == 1)
+        ans = -y_X + x_center
+    else
+        ans = y_X + x_center
+
+    ans += min
+
+    // обработать выход за границу
+    if (ans < 0 + eps)
+        ans = interfernce_pattern_generator(min, max, id)
+
+    if (ans > x - eps)
+        ans = interfernce_pattern_generator(min, max, id)
+
+    // увеличить в массиве значение соответствующего числа x
+    arr[ Math.floor(ans) ] += 1
+    
+    // рандом для y встроенный
+    var yy = Math.floor(Math.random() * (y + 1))
+
+    // добавить в словарь x
+
+    dict_poins[String(id)] = (yy, xx)
+    // вернуть значение
+    return xx
+}
+
+
+// цикл с счётчиком
+while (last_id < count)  
+{
+    // обработать рандомный выбор отверстия
+    var slot = Math.round(1 - 0.5 + Math.random() * (2))
+    if (slot == 1)
+        interfernce_pattern_generator(1, x - distance, last_id)
+    else
+        interfernce_pattern_generator(1 + distance, x, last_id)
+
+    console.log(dict_poins[String(last_id)])
+    last_id++
+}
+// отрисовать точки
+
+
+// построить график
+
+
+// добавить гауссовское распределение с установленным счётчиком

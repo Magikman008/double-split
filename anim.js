@@ -60,7 +60,7 @@ two
     .bind('update', function (frameCount) {
         for (var j = 0; j < i; j++) {
             if (dots[j].position.x < 200) {
-                if (holes[j - 1] <= 0.5) {
+                if (holes[j] <= 0.5) {
                     dots[j].position.x += 3;
                     dots[j].position.y = 350 + 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15
                 }
@@ -70,13 +70,13 @@ two
                 }
             }
             else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
-                if (holes[j - 1] <= 0.5) {
+                if (holes[j] <= 0.5) {
                     dots[j].position.x += 3;
-                    dots[j].position.y = 318 - (cords[j] - 380) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1300))
+                    dots[j].position.y = 380 - (cords[j] - 340) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400))
                 }
                 else {
                     dots[j].position.x += 3;
-                    dots[j].position.y = 318 + (cords[j] - 320) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1300))
+                    dots[j].position.y = 320 + (cords[j] - 340) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400))
                 }
             }
         }

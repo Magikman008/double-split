@@ -69,14 +69,14 @@ two
                     dots[j].position.y = 350 - 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) - 15
                 }
             }
-            else if (dots[j].position.x < 850) {
+            else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
                 if (holes[j - 1] <= 0.5) {
                     dots[j].position.x += 3;
-                    dots[j].position.y = 380 - (cords[j] - 380) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1300))
+                    dots[j].position.y = 318 - (cords[j] - 380) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1300))
                 }
                 else {
                     dots[j].position.x += 3;
-                    dots[j].position.y = 320 + (cords[j] - 320) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1300))
+                    dots[j].position.y = 318 + (cords[j] - 320) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1300))
                 }
             }
         }
@@ -87,9 +87,9 @@ two
 document.getElementById("Sphere").onclick = add;
 
 function add() {
-    dots.push(two.makeCircle(50, centerY, 5));
+    dots.push(two.makeCircle(50, centerY, 2));
     holes.push(Math.random());
-    cords.push(intRange(0, 650))
+    cords.push(interfernce_pattern_generator(1, 650, i));
     i++;
 };
 

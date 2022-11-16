@@ -2,8 +2,8 @@
 
 
 // объявить параметры, ввод которых не требуется
-var y = 10
-var x = 1000
+var y = 100
+var x = 700
 
 var last_id = 0
 var eps = 0.001
@@ -44,7 +44,7 @@ function interfernce_pattern_generator(min, max, id)
 
     // домножить на коэффициент 
     var x_center = (max - min + 1) / 2
-    var k = x_center / A * (max - min + 1)
+    var k = x_center / A * (max - min + 1) ** 2 * 100000
 
     y_X *= k
 
@@ -74,25 +74,26 @@ function interfernce_pattern_generator(min, max, id)
 
     // добавить в словарь x
 
-    dict_poins[String(id)] = (yy, xx)
+    dict_poins[String(id)] = [yy, ans]
+    console.log(dict_poins[String(id)][0], dict_poins[String(id)][1])
     // вернуть значение
-    return xx
+    return ans
 }
 
 
 // цикл с счётчиком
-while (last_id < count)  
-{
-    // обработать рандомный выбор отверстия
-    var slot = Math.round(1 - 0.5 + Math.random() * (2))
-    if (slot == 1)
-        interfernce_pattern_generator(1, x - distance, last_id)
-    else
-        interfernce_pattern_generator(1 + distance, x, last_id)
+// while (last_id < count)  
+// {
+//     // обработать рандомный выбор отверстия
+//     var slot = Math.round(1 - 0.5 + Math.random() * (2))
+//     if (slot == 1)
+//         interfernce_pattern_generator(1, x - distance, last_id)
+//     else
+//         interfernce_pattern_generator(1 + distance, x, last_id)
 
-    console.log(dict_poins[String(last_id)])
-    last_id++
-}
+//     console.log(dict_poins[String(last_id)][0], dict_poins[String(last_id)][1])
+//     last_id++
+// }
 // отрисовать точки
 
 

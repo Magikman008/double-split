@@ -3,9 +3,9 @@
 
 // объявить параметры, ввод которых не требуется
 var y = 100
-var x = 700
+var x = 650
 
-var last_id = 0
+// var last_id = 0
 var eps = 0.001
 
 
@@ -13,21 +13,23 @@ var eps = 0.001
 var d_del_lambda = 5
 var L = 5
 var distance = 80
-var count = 100
+
+
+// var count = 100
 
 
 // объявление словаря и массива
 let arr = new Array(x)
 for (let i = 0; i < arr.length; i++)
     arr[i] = 0
-console.log(arr)
+// console.log(arr)
 
 var dict_poins = new Object()
 
 
 
 // предварительные вычисления
-A = L / (Math.PI ** 2 * d_del_lambda)
+
 
 
 
@@ -35,6 +37,7 @@ A = L / (Math.PI ** 2 * d_del_lambda)
 // генератор интерференционной картины
 function interfernce_pattern_generator(min, max, id)
 {
+    A = L / (Math.PI ** 2 * d_del_lambda)
     // получение рандомного числа из встроенного генератора рандомных чисел
     var xx = Math.floor(Math.random() * (max - min + 1))
 
@@ -44,7 +47,7 @@ function interfernce_pattern_generator(min, max, id)
 
     // домножить на коэффициент 
     var x_center = (max - min + 1) / 2
-    var k = x_center / A * (max - min + 1) ** 2 * 100000
+    var k = x_center / A * (max - min + 1) ** 2 * 10000
 
     y_X *= k
 
@@ -75,7 +78,7 @@ function interfernce_pattern_generator(min, max, id)
     // добавить в словарь x
 
     dict_poins[String(id)] = [yy, ans]
-    console.log(dict_poins[String(id)][0], dict_poins[String(id)][1])
+    // console.log(dict_poins[String(id)][0], dict_poins[String(id)][1])
     // вернуть значение
     return ans
 }

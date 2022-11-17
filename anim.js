@@ -60,7 +60,7 @@ two
     .bind('update', function (frameCount) {
         for (var j = 0; j < i; j++) {
             if (dots[j].position.x < 200) {
-                if (holes[j] <= 0.5) {
+                if (holes[j] == 1) {
                     dots[j].position.x += 3;
                     dots[j].position.y = 350 + 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15
                 }
@@ -70,13 +70,13 @@ two
                 }
             }
             else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
-                if (holes[j] <= 0.5) {
+                if (holes[j] == 1) {
                     dots[j].position.x += 3;
-                    dots[j].position.y = 380 - (cords[j] - 340) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400))
+                    dots[j].position.y = 380 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400))
                 }
                 else {
                     dots[j].position.x += 3;
-                    dots[j].position.y = 320 + (cords[j] - 340) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400))
+                    dots[j].position.y = 320 + (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400))
                 }
             }
         }
@@ -86,10 +86,28 @@ two
 
 document.getElementById("Sphere").onclick = add;
 
+var y = 100
+var x = 650
+
+// var last_id = 0
+var eps = 0.001
+
+
+// ввод параметров
+var d_del_lambda = 5
+var L = 5
+var distance = 80
+
 function add() {
     dots.push(two.makeCircle(50, centerY, 2));
-    holes.push(Math.random());
-    cords.push(interfernce_pattern_generator(1, 650, i));
+    var slot = Math.round(1 - 0.5 + Math.random() * (2))
+    if (slot == 1)
+        cords.push(interfernce_pattern_generator(1, x - distance, i))
+    else
+        cords.push(interfernce_pattern_generator(1 + distance, x, i))
+
+    holes.push(slot);
+    // cords.push(interfernce_pattern_generator(1, 650, i));
     i++;
 };
 
@@ -112,4 +130,19 @@ document.getElementById("range").oninput = function () {
     clearInterval(refresh);
     rangeValue.innerText = this.value
     refresh = window.setInterval(add, 1000 / this.value);
+}
+
+document.getElementById("range2").oninput = function () {
+    rangeValue2.innerText = this.value
+    distance = this.value
+}
+
+document.getElementById("range3").oninput = function () {
+    rangeValue3.innerText = this.value
+    d_del_lambda = this.value
+}
+
+document.getElementById("range4").oninput = function () {
+    rangeValue4.innerText = this.value
+    L = this.value
 }

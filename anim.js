@@ -18,18 +18,9 @@ var centerY = 350;
 
 var serifs = Array();
 function make_serifs(){
-    linewhole.remove();
-    serifs.forEach(element => {
-        element.remove();
-    });
-
-    serifs.length = 0;
-
-    linewhole = two.makeLine(900, 0, 900, centerY * 2);
     styleLine(linewhole);
 
     for (var i = 0; i <= 40; i++) {
-        serifs.push(two.makeLine(890, i * (centerY * 2 - 1) / 40, 900, i * (centerY * 2 - 1) / 40));
         styleLine(serifs[i]);
     }
 }
@@ -124,6 +115,11 @@ document.getElementById("clear").onclick = function () {
     dots.forEach(element => {
         element.remove();
     });
+    
+    dots.length = 0;
+    holes.length = 0;
+    cords.lengs = 0;
+    dict_poins.lengs = 0;
     i = 0;
 };
 

@@ -6,16 +6,22 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.8.10/two.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.8.10/two.module.js"></script>
   <link rel="stylesheet" href="css.css" />
+  <link href="light-theme.css" rel="stylesheet" id="theme-link">
   <link rel="stylesheet" href="css_graph.css" />
   <script type="text/javascript" src="generator.js"></script>
   <script type="text/javascript" src="graph.js"></script>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <button class="theme" type="button" id="Theme">
+    ◐
+  </button>
   <div id="draw-animation">
   </div>
-  <div style="display: inline-block;">
+  <div class="interface" style="margin: 10px;">
     <button class="button" type="button" id="Sphere">
       Add sphere
     </button>
@@ -31,42 +37,27 @@
     <div class="slider">
       <p>Spawn speed</p>
       <input id="range" type="range" min="1" max="30" value="3" oninput="rangeValue.innerText = this.value">
-      <p id="rangeValue">3</p>
+      <p class="right" id="rangeValue">3</p>
     </div>
   </div>
   <div style="display: inline-block;">
     <div class="slider">
       <p>Distance</p>
-      <input id="range2" type="range" min="1" max="100" value="10" oninput="rangeValue2.innerText = this.value">
-      <p id="rangeValue2">10</p>
+      <input id="range2" type="range" min="1" max="50" value="10" oninput="rangeValue2.innerText = this.value">
+      <p class="right" id="rangeValue2">10</p>
     </div>
     <div class="slider">
       <p>D/lambda</p>
       <input id="range3" type="range" min="1" max="10" value="5" oninput="rangeValue3.innerText = this.value">
-      <p id="rangeValue3">5</p>
+      <p class="right" id="rangeValue3">5</p>
     </div>
-  </div>
-  <div style="display: inline-block;">
-    <button class="button" type="button" id="Graph">
-      Add graph
-    </button>
     <div class="slider">
       <p>L</p>
       <input id="range4" type="range" min="1" max="50" value="5" oninput="rangeValue4.innerText = this.value">
-      <p id="rangeValue4">5</p>
+      <p class="right" id="rangeValue4">5</p>
     </div>
   </div>
   <script type="text/javascript" src="anim.js"></script>
-</body>
-
-<body>
-  <div style="width: 800px;">
-  <canvas id="graph">
-  </canvas>
-  </div>
-  
-  <script type="module" src="graph.js">
-  </script>
 </body>
 
 </html>

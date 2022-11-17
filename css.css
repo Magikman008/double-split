@@ -1,78 +1,76 @@
 body {
     margin: 0;
-    background-color: #fbfbfb;
+    transition: .2s linear;
 }
 
 #draw-animation {
     height: 700px;
-    background-color: lightblue;
+    width: 901px;
+    transition: .2s linear;
 }
 
 .button {
-    border: 1px solid gray;
+    border: 0px;
     border-radius: 100px;
-    transition: border-color .2s linear;
-    background: #ffffff;
+    transition: .2s linear;
     padding: 10px 15px;
     margin: 10px;
-    font-size: 20pt;
-    border-radius: 100px;
-    /* box-shadow: 0px 10px 30px #7E6D5766; */
-    
-    font-size: 20px;
-    font-weight: 600;
-    font-family: Open Sans;
-    color: black;
+    display: inline-flex;
 }
-/* 
-.button:active {
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
-} */
 
-.button:hover {
-    border: 1px solid black;
+.theme {
+    border: 0px;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    transition: .2s linear;
+    right: 0;
+    margin: 10px;
 }
 
 .slider {
-    height: 30px;
     padding: 10px 15px;
     margin: 10px;
-    background: #ffffff;
     border-radius: 100px;
-    border: 1px solid gray;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    /* box-shadow: 0px 15px 30px #7E6D5766; */
+    transition: .2s linear;
 }
 
 .slider p {
-    font-size: 20px;
-    font-weight: 600;
-    font-family: Open Sans;
-    /* padding-left: 15px; */
-    color: black;
+    margin: 0;
 }
 
 .slider input[type="range"] {
     -webkit-appearance: none !important;
+    appearance: none !important;
     width: 300px;
     height: 2px;
     margin: 0px 25px;
-    background: black;
-    border: none;
-    outline: none;
+    transition: .2s linear;
 }
 
 .slider input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none !important;
+    appearance: none !important;
+    /* transition: .2s linear; */
     width: 15px;
     height: 15px;
-    background: white;
-    border: 2px solid black;
     border-radius: 50%;
     cursor: pointer;
 }
 
-.slider input[type="range"]::-webkit-slider-thumb:hover {
-    background: gray;
+.interface,
+.interface button,
+.theme {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+
+.right {
+    min-width: 30px;
+    float: right;
+    text-align: right;
 }

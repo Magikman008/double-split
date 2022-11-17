@@ -17,7 +17,7 @@ var centerY = 350;
 
 
 var serifs = Array();
-function make_serifs(){
+function make_serifs() {
     styleLine(linewhole);
 
     for (var i = 0; i <= 40; i++) {
@@ -25,9 +25,9 @@ function make_serifs(){
     }
 }
 
-var lineup = two.makeLine(200, 0, 200, centerY - 40 + L / 3);
-var linecenter = two.makeLine(200, centerY - 20 + L / 3, 200, centerY + 20 - L / 3);
-var linedown = two.makeLine(200, centerY + 40 - L / 3, 200, centerY * 2);
+var lineup = two.makeLine(200, 0, 200, centerY - 40 + distance / 3);
+var linecenter = two.makeLine(200, centerY - 20 + distance / 3, 200, centerY + 20 - distance / 3);
+var linedown = two.makeLine(200, centerY + 40 - distance / 3, 200, centerY * 2);
 var linewhole = two.makeLine(900, 0, 900, centerY * 2);
 
 styleLine(linedown);
@@ -51,21 +51,21 @@ two
             if (dots[j].position.x < 200) {
                 if (holes[j] == 1) {
                     dots[j].position.x += 5;
-                    dots[j].position.y = 350 + (15 - L / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15 - L / 6;
+                    dots[j].position.y = 350 + (15 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15 - distance / 6;
                 }
                 else {
                     dots[j].position.x += 5;
-                    dots[j].position.y = 350 - (15 - L / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) - 15 + L / 6;
+                    dots[j].position.y = 350 - (15 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) - 15 + distance / 6;
                 }
             }
             else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
                 if (holes[j] == 1) {
                     dots[j].position.x += 5;
-                    dots[j].position.y = 380 - L / 3 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
+                    dots[j].position.y = 380 - distance / 3 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
                 }
                 else {
                     dots[j].position.x += 5;
-                    dots[j].position.y = 320 + L / 3 + (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
+                    dots[j].position.y = 320 + distance / 3 + (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
                 }
             }
         }
@@ -74,9 +74,9 @@ two
         linecenter.remove();
         linedown.remove();
 
-        lineup = two.makeLine(200, 0, 200, centerY - 40 + L / 3);
-        linecenter = two.makeLine(200, centerY - 20 + L / 3, 200, centerY + 20 - L / 3);
-        linedown = two.makeLine(200, centerY + 40 - L / 3, 200, centerY * 2);
+        lineup = two.makeLine(200, 0, 200, centerY - 40 + distance / 3);
+        linecenter = two.makeLine(200, centerY - 20 + distance / 3, 200, centerY + 20 - distance / 3);
+        linedown = two.makeLine(200, centerY + 40 - distance / 3, 200, centerY * 2);
 
         styleLine(linecenter);
         styleLine(lineup);
@@ -96,7 +96,7 @@ var eps = 0.001
 // ввод параметров
 var d_del_lambda = 5;
 var L = 5;
-var distance = 80;
+var distance = 10;
 
 function add() {
     dots.push(two.makeCircle(50, centerY, 2));
@@ -115,7 +115,7 @@ document.getElementById("clear").onclick = function () {
     dots.forEach(element => {
         element.remove();
     });
-    
+
     dots.length = 0;
     holes.length = 0;
     cords.lengs = 0;
@@ -154,14 +154,14 @@ document.getElementById("range4").oninput = function () {
 }
 
 const theme = document.querySelector("#theme-link");
-document.getElementById("Theme").addEventListener("click", function() {
-  if (theme.getAttribute("href") == "light-theme.css") {
-    theme.href = "dark-theme.css";
-    color = "white";
-    make_serifs();
-  } else {
-    theme.href = "light-theme.css";
-    color = "black";
-    make_serifs();
-  }
+document.getElementById("Theme").addEventListener("click", function () {
+    if (theme.getAttribute("href") == "light-theme.css") {
+        theme.href = "dark-theme.css";
+        color = "white";
+        make_serifs();
+    } else {
+        theme.href = "light-theme.css";
+        color = "black";
+        make_serifs();
+    }
 });

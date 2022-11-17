@@ -3,9 +3,20 @@ body {
     transition: .2s linear;
 }
 
+.chart {
+    transform-origin: bottom left;
+    transform: translateY(-350px) rotate(90deg);
+}
+
+.canvases {
+    display: inline-flex;
+    max-width: 700px;
+}
+
 #draw-animation {
     height: 700px;
     width: 901px;
+    min-width: 901px;
     transition: .2s linear;
 }
 

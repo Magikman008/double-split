@@ -5,21 +5,26 @@
   <meta charset="utf-8">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.8.10/two.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.8.10/two.module.js"></script>
+  <script src="https://unpkg.com/chart.js@4.0.1/dist/chart.umd.js"></script>
   <link rel="stylesheet" href="css.css" />
   <link href="light-theme.css" rel="stylesheet" id="theme-link">
   <link rel="stylesheet" href="css_graph.css" />
   <script type="text/javascript" src="generator.js"></script>
   <script type="text/javascript" src="graph.js"></script>
+  <script type="text/javascript" src="test.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <button class="theme" type="button" id="Theme">
-    ◐
-  </button>
-  <div id="draw-animation">
+  <div class="canvases"><button class="theme" type="button" id="Theme">
+      ◐
+    </button>
+    <div id="draw-animation">
+    </div>
+
+    <canvas class="chart"></canvas>
   </div>
   <div class="interface" style="margin: 10px;">
     <button class="button" type="button" id="Sphere">

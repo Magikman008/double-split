@@ -1,20 +1,7 @@
-// import Two from 'https://cdn.skypack.dev/two.js@latest';
-
 var elem = document.getElementById('draw-animation');
-
-var centerX = 0;
-var centerY = 0;
-var offsetY = elem.offsetTop;
 var refresh = window.setInterval(add, 1000 / document.getElementById("range").value);
 
 clearInterval(refresh);
-
-// window.onresize = function (event) {
-//     two.update();
-//     centerX = elem.clientWidth / 2;
-//     centerY = elem.clientHeight / 2;
-//     orbitA = two.makeCircle(centerX, centerY, 50);
-// };
 
 function styleLine(line) {
     line.fill = "transparent";
@@ -22,35 +9,25 @@ function styleLine(line) {
     line.stroke = "black";
 }
 
-window.onload = function () {
-    centerY = elem.clientHeight / 2;
-    centerX = elem.clientWidth / 2;
+var two = new Two({ fitted: true }).appendTo(elem);
 
-    var lineup = two.makeLine(200, 0, 200, centerY - 40);
-    styleLine(lineup);
+var centerY = 350;
 
-    var linecenter = two.makeLine(200, centerY - 20, 200, centerY + 20);
-    styleLine(linecenter);
+var lineup = two.makeLine(200, 0, 200, centerY - 40 + L / 3);
+var linecenter = two.makeLine(200, centerY - 20 + L / 3, 200, centerY + 20 - L / 3);
+var linedown = two.makeLine(200, centerY + 40 - L / 3, 200, centerY * 2);
+var linewhole = two.makeLine(900, 0, 900, centerY * 2);
 
-    var linedown = two.makeLine(200, centerY + 40, 200, centerY * 2);
-    styleLine(linedown);
+styleLine(linedown);
+styleLine(linecenter);
+styleLine(lineup);
+styleLine(linewhole);
 
-    var lineup = two.makeLine(900, 0, 900, centerY * 2);
-    styleLine(lineup);
-
-    for (var i = 0; i <= 40; i++) {
-        var glinevert = two.makeLine(890, i * (centerY * 2 - 1) / 40, 900, i * (centerY * 2 - 1) / 40);
-        styleLine(glinevert);
-    }
-    // refresh = window.setInterval(add, 1000/document.getElementById("range").value);
-};
-
-function intRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+for (var i = 0; i <= 40; i++) {
+    var glinevert = two.makeLine(890, i * (centerY * 2 - 1) / 40, 900, i * (centerY * 2 - 1) / 40);
+    styleLine(glinevert);
 }
 
-
-var two = new Two({ fitted: true }).appendTo(elem);
 var dots = Array();
 var holes = Array();
 var cords = Array();
@@ -61,26 +38,37 @@ two
         for (var j = 0; j < i; j++) {
             if (dots[j].position.x < 200) {
                 if (holes[j] == 1) {
-                    dots[j].position.x += 3;
-                    dots[j].position.y = 350 + 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15
+                    dots[j].position.x += 5;
+                    dots[j].position.y = 350 + (15 - L / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) + 15 - L / 6;
                 }
                 else {
-                    dots[j].position.x += 3;
-                    dots[j].position.y = 350 - 15 * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) - 15
+                    dots[j].position.x += 5;
+                    dots[j].position.y = 350 - (15 - L / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50) / 150 - 1 / 2)) - 15 + L / 6;
                 }
             }
             else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
                 if (holes[j] == 1) {
-                    dots[j].position.x += 3;
-                    dots[j].position.y = 380 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400))
+                    dots[j].position.x += 5;
+                    dots[j].position.y = 380 - L / 3 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
                 }
                 else {
-                    dots[j].position.x += 3;
-                    dots[j].position.y = 320 + (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400))
+                    dots[j].position.x += 5;
+                    dots[j].position.y = 320 + L / 3 + (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
                 }
             }
         }
 
+        lineup.remove();
+        linecenter.remove();
+        linedown.remove();
+
+        lineup = two.makeLine(200, 0, 200, centerY - 40 + L / 3);
+        linecenter = two.makeLine(200, centerY - 20 + L / 3, 200, centerY + 20 - L / 3);
+        linedown = two.makeLine(200, centerY + 40 - L / 3, 200, centerY * 2);
+
+        styleLine(linecenter);
+        styleLine(lineup);
+        styleLine(linedown);
     })
     .play();
 
@@ -94,17 +82,17 @@ var eps = 0.001
 
 
 // ввод параметров
-var d_del_lambda = 5
-var L = 5
-var distance = 80
+var d_del_lambda = 5;
+var L = 5;
+var distance = 80;
 
 function add() {
     dots.push(two.makeCircle(50, centerY, 2));
-    var slot = Math.round(1 - 0.5 + Math.random() * (2))
+    var slot = Math.round(1 - 0.5 + Math.random() * (2));
     if (slot == 1)
-        cords.push(interfernce_pattern_generator(1, x - distance, i))
+        cords.push(interfernce_pattern_generator(1, x - distance, i));
     else
-        cords.push(interfernce_pattern_generator(1 + distance, x, i))
+        cords.push(interfernce_pattern_generator(1 + distance, x, i));
 
     holes.push(slot);
     // cords.push(interfernce_pattern_generator(1, 650, i));
@@ -115,6 +103,7 @@ document.getElementById("clear").onclick = function () {
     dots.forEach(element => {
         element.remove();
     });
+    i = 0;
 };
 
 document.getElementById("start").onclick = function () {
@@ -144,5 +133,5 @@ document.getElementById("range3").oninput = function () {
 
 document.getElementById("range4").oninput = function () {
     rangeValue4.innerText = this.value
-    L = this.value
+    L = Number(this.value);
 }

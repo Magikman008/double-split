@@ -86,18 +86,6 @@ two
 
 document.getElementById("Sphere").onclick = add;
 
-var y = 100
-var x = 650
-
-// var last_id = 0
-var eps = 0.001
-
-
-// ввод параметров
-var d_del_lambda = 5
-var L = 5
-var distance = 80
-
 function add() {
     dots.push(two.makeCircle(50, centerY, 2));
     var slot = Math.round(1 - 0.5 + Math.random() * (2))
@@ -124,6 +112,10 @@ document.getElementById("start").onclick = function () {
 
 document.getElementById("stop").onclick = function () {
     clearInterval(refresh);
+};
+
+document.getElementById("graph").onclick = function () {
+    console.log(arr)
 };
 
 document.getElementById("range").oninput = function () {

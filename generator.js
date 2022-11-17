@@ -22,7 +22,7 @@ var distance = 80
 let arr = new Array(x)
 for (let i = 0; i < arr.length; i++)
     arr[i] = 0
-// console.log(arr)
+console.log(arr)
 
 var dict_poins = new Object()
 

@@ -1,38 +1,44 @@
 body {
     margin: 0;
-    background-color: #fbfbfb;
+    transition: .2s linear;
 }
 
 #draw-animation {
     height: 700px;
     width: 901px;
-    background-color: lightblue;
+    transition: .2s linear;
 }
 
 .button {
-    border: 2px solid black;
+    border: 0px;
     border-radius: 100px;
-    transition: border-color .2s linear;
-    background: #ffffff;
+    transition: .2s linear;
     padding: 10px 15px;
     margin: 10px;
-    border-radius: 100px;
     display: inline-flex;
 }
 
-.button:hover {
-    border: 2px solid gray;
+.theme {
+    border: 0px;
+    border-radius: 100px;
+    /* padding: 10px 10px; */
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    transition: .2s linear;
+    right: 0;
+    margin: 10px;
 }
 
 .slider {
     /* height: 30px; */
     padding: 10px 15px;
     margin: 10px;
-    background: #ffffff;
     border-radius: 100px;
-    border: 2px solid black;
     display: inline-flex;
     align-items: center;
+    /* transition: border-color .2s linear; */
+    transition: .2s linear;
 }
 
 .slider p {
@@ -44,7 +50,6 @@ body {
     width: 300px;
     height: 2px;
     margin: 0px 25px;
-    background: black;
 }
 
 .slider input[type="range"]::-webkit-slider-thumb {
@@ -52,22 +57,16 @@ body {
     transition: background .2s linear;
     width: 15px;
     height: 15px;
-    background: white;
-    border: 2px solid black;
     border-radius: 50%;
     cursor: pointer;
 }
 
-.slider input[type="range"]::-webkit-slider-thumb:hover {
-    background: gray;
-}
-
 .interface,
-.interface button {
-    font-size: 20px;
+.interface button,
+.theme {
+    font-size: 18px;
     font-weight: 500;
-    font-family: "Open Sans";
-    color: black;
+    font-family: 'Inter', sans-serif;
 }
 
 .right {

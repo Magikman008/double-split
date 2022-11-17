@@ -3,15 +3,36 @@ var refresh = window.setInterval(add, 1000 / document.getElementById("range").va
 
 clearInterval(refresh);
 
+var color = "black"
+
 function styleLine(line) {
     line.fill = "transparent";
     line.linewidth = 2;
-    line.stroke = "black";
+    line.stroke = color;
 }
 
 var two = new Two({ fitted: true }).appendTo(elem);
 
 var centerY = 350;
+
+
+var serifs = Array();
+function make_serifs(){
+    linewhole.remove();
+    serifs.forEach(element => {
+        element.remove();
+    });
+
+    serifs.length = 0;
+
+    linewhole = two.makeLine(900, 0, 900, centerY * 2);
+    styleLine(linewhole);
+
+    for (var i = 0; i <= 40; i++) {
+        serifs.push(two.makeLine(890, i * (centerY * 2 - 1) / 40, 900, i * (centerY * 2 - 1) / 40));
+        styleLine(serifs[i]);
+    }
+}
 
 var lineup = two.makeLine(200, 0, 200, centerY - 40 + L / 3);
 var linecenter = two.makeLine(200, centerY - 20 + L / 3, 200, centerY + 20 - L / 3);
@@ -24,8 +45,8 @@ styleLine(lineup);
 styleLine(linewhole);
 
 for (var i = 0; i <= 40; i++) {
-    var glinevert = two.makeLine(890, i * (centerY * 2 - 1) / 40, 900, i * (centerY * 2 - 1) / 40);
-    styleLine(glinevert);
+    serifs.push(two.makeLine(890, i * (centerY * 2 - 1) / 40, 900, i * (centerY * 2 - 1) / 40));
+    styleLine(serifs[i]);
 }
 
 var dots = Array();
@@ -135,3 +156,16 @@ document.getElementById("range4").oninput = function () {
     rangeValue4.innerText = this.value
     L = Number(this.value);
 }
+
+const theme = document.querySelector("#theme-link");
+document.getElementById("Theme").addEventListener("click", function() {
+  if (theme.getAttribute("href") == "light-theme.css") {
+    theme.href = "dark-theme.css";
+    color = "white";
+    make_serifs();
+  } else {
+    theme.href = "light-theme.css";
+    color = "black";
+    make_serifs();
+  }
+});

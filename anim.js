@@ -128,9 +128,9 @@ document.getElementById("stop").onclick = function () {
     clearInterval(refresh);
 };
 
-document.getElementById("graph").onclick = function () {
-    console.log(arr)
-};
+// document.getElementById("graph").onclick = function () {
+//     console.log(arr)
+// };
 
 document.getElementById("range").oninput = function () {
     clearInterval(refresh);

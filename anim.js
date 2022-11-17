@@ -44,21 +44,21 @@ two
         for (var j = 0; j < i; j++) {
             if (dots[j].position.x < 200) {
                 if (holes[j] == 1) {
-                    dots[j].position.x += 5;
+                    dots[j].position.x += 4;
                     dots[j].position.y = 350 + (15 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) + 15 - distance / 6;
                 }
                 else {
-                    dots[j].position.x += 5;
+                    dots[j].position.x += 4;
                     dots[j].position.y = 350 - (15 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) - 15 + distance / 6;
                 }
             }
             else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
                 if (holes[j] == 1) {
-                    dots[j].position.x += 5;
+                    dots[j].position.x += 4;
                     dots[j].position.y = 380 - distance / 3 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
                 }
                 else {
-                    dots[j].position.x += 5;
+                    dots[j].position.x += 4;
                     dots[j].position.y = 320 + distance / 3 + (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
                 }
             }

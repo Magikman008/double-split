@@ -103,4 +103,48 @@ function interfernce_pattern_generator(min, max, id)
 // построить график
 
 
+let arr_labels = new Array(x)
+for (let i = 0; i < arr_labels.length; i++)
+    arr_labels[i] = i
+
 // добавить гауссовское распределение с установленным счётчиком
+document.addEventListener('DOMContentLoaded', () => { // структура документа загружена   
+  
+    my_chart = new Chart( // инициализируем плагин
+      document.querySelector('.chart'), // первым параметром передаем элемент canvas по селектору
+      // вторым параметром передаем настройки в виде объекта
+      { 
+        options: { rotation: 90 },
+        type: 'line', // тип графика, в данном случае линейный
+        data: { // общие данные графика в виде объекта
+          labels: arr_labels, // метки по оси X
+          datasets: [ // набор данных, который будет отрисовываться в виде массива с объектами
+            { 
+                // labels: arr_labels,
+                data: arr, // данные в виде массива с числами, количество должно совпадать с количеством меток по оси X
+                cubicInterpolationMode: 'monotone' //сглаживание
+            }
+          ]
+        },
+        // options: {
+        //     scales: {
+        //         xAxes: [{
+        //           gridLines: {
+        //             display: false
+        //           }
+        //         }],
+        //         yAxes: [{
+        //           gridLines: {
+        //             display: false
+        //           }
+        //         }]
+        //     },
+            
+        //     rotation:90
+        // } // дополнительные опции для графика в виде объекта, если не нужны - передаем пустой объект
+      }
+    );
+  
+  })
+
+

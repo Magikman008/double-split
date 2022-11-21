@@ -7,7 +7,7 @@ import Chart from 'chart.js/auto'
 //     options: 
 // })
 
-new Chart(
+my_chart = new Chart(
     {
     type: 'line',
     data: {

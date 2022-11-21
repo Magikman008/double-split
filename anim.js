@@ -118,6 +118,9 @@ document.getElementById("clear").onclick = function () {
     cords.lengs = 0;
     dict_poins.lengs = 0;
     i = 0;
+    for (let i = 0; i < arr.length; i++)
+        arr[i] = 0;
+    my_chart.update();
 };
 
 document.getElementById("start").onclick = function () {
@@ -132,12 +135,14 @@ document.getElementById("stop").onclick = function () {
 };
 
 document.getElementById("graph").onclick = function () {
+    my_chart.data.datasets.data = arr;
+    my_chart.update();
 };
 
 document.getElementById("speed").oninput = function () {
     clearInterval(refresh);
     // rangeSpeed.innerText = Math.round(this.value / 10);
-    var temp =  Math.round(this.value / 10);
+    var temp = Math.round(this.value / 10);
     rangeSpeedt.value = temp;
     refresh = window.setInterval(add, 1000 / temp);
 }

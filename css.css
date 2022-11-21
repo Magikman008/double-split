@@ -43,6 +43,7 @@ body {
 .slider {
     padding: 10px 15px;
     margin: 10px;
+    margin-right: 0px;
     border-radius: 100px;
     display: inline-flex;
     align-items: center;
@@ -70,11 +71,13 @@ body {
     height: 15px;
     border-radius: 50%;
     cursor: pointer;
+    transition: .1s linear;
 }
 
 .interface,
 .interface button,
-.theme {
+.theme,
+input[type="number"] {
     font-size: 18px;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
@@ -84,4 +87,25 @@ body {
     min-width: 30px;
     float: right;
     text-align: right;
+}
+
+input[type="number"] {
+    border: 0px;
+    border-radius: 100px;
+    /* height: initial; */
+    width: 60px;
+padding: 3px;
+text-align: center;
+    /* margin: 0; */
+
+}
+
+input[type="number"]:focus {
+    outline: 0px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
 }

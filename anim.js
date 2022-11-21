@@ -1,5 +1,5 @@
 var elem = document.getElementById('draw-animation');
-var refresh = window.setInterval(add, 1000 / document.getElementById("range").value);
+var refresh = window.setInterval(add, 1000 / document.getElementById("speed").value);
 
 clearInterval(refresh);
 
@@ -55,6 +55,7 @@ two
             else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
                 if (holes[j] == 1) {
                     dots[j].position.x += 4;
+                    // dots[j].position.y = 380 + (cords[j] - 330 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 200) / (dict_poins[String(j)][0] + 850 - y) - 1 / 2)) + 15 - distance / 6;
                     dots[j].position.y = 380 - distance / 3 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
                 }
                 else {
@@ -121,35 +122,54 @@ document.getElementById("clear").onclick = function () {
 
 document.getElementById("start").onclick = function () {
     clearInterval(refresh);
-    refresh = window.setInterval(add, 1000 / document.getElementById("range").value);
+    refresh = window.setInterval(add, 1000 / document.getElementById("speed").value);
 };
 
 document.getElementById("stop").onclick = function () {
     clearInterval(refresh);
 };
 
-// document.getElementById("graph").onclick = function () {
-//     console.log(arr)
-// };
+document.getElementById("graph").onclick = function () {
+};
 
-document.getElementById("range").oninput = function () {
+document.getElementById("speed").oninput = function () {
     clearInterval(refresh);
-    rangeValue.innerText = this.value
-    refresh = window.setInterval(add, 1000 / this.value);
+    // rangeSpeed.innerText = Math.round(this.value / 10);
+    var temp =  Math.round(this.value / 10);
+    rangeSpeedt.value = temp;
+    refresh = window.setInterval(add, 1000 / temp);
 }
 
-document.getElementById("range2").oninput = function () {
-    rangeValue2.innerText = this.value
+document.getElementById("rangeSpeedt").onchange = function () {
+    this.style["outline"] = "0";
+    clearInterval(refresh);
+    rangeSpeedt.value = Math.floor(this.value);
+
+    if (this.value == 0 || this.value > 30) {
+        this.style["outline"] = "2px solid red";
+    }
+    else {
+        speed.value = this.value * 10;
+        refresh = window.setInterval(add, 1000 / Math.round(this.value));
+    }
+}
+
+document.getElementById("rangeSpeedt").addEventListener("focus", function () {
+    this.style["outline"] = "0";
+});
+
+document.getElementById("dist").oninput = function () {
+    rangeDist.innerText = this.value
     distance = this.value
 }
 
-document.getElementById("range3").oninput = function () {
-    rangeValue3.innerText = this.value
-    d_del_lambda = this.value
+document.getElementById("dlamb").oninput = function () {
+    rangeDlamb.innerText = Math.round(this.value / 10);
+    d_del_lambda = Math.round(this.value / 10);
 }
 
-document.getElementById("range4").oninput = function () {
-    rangeValue4.innerText = this.value
+document.getElementById("L").oninput = function () {
+    rangeL.innerText = this.value
     L = Number(this.value);
 }
 

@@ -39,25 +39,29 @@
     <button class="button" type="button" id="stop">
       Stop
     </button>
+    <button class="button" type="button" id="graph">
+      Update graph
+    </button>
     <div class="slider">
       <p>Spawn speed</p>
-      <input id="range" type="range" min="1" max="30" value="3" oninput="rangeValue.innerText = this.value">
-      <p class="right" id="rangeValue">3</p>
+      <input id="speed" type="range" min="10" max="300" value="30">
+      <!-- <p class="right" id="rangeSpeed">3</p> -->
+      <input value="3" type="number" id="rangeSpeedt" step="1">
     </div>
     <div class="slider">
       <p>Distance</p>
-      <input id="range2" type="range" min="1" max="50" value="10" oninput="rangeValue2.innerText = this.value">
-      <p class="right" id="rangeValue2">10</p>
+      <input id="dist" type="range" min="1" max="50" value="10">
+      <p class="right" id="rangeDist">10</p>
     </div>
     <div class="slider">
       <p>D/lambda</p>
-      <input id="range3" type="range" min="1" max="10" value="5" oninput="rangeValue3.innerText = this.value">
-      <p class="right" id="rangeValue3">5</p>
+      <input id="dlamb" type="range" min="10" max="100" value="50">
+      <p class="right" id="rangeDlamb">5</p>
     </div>
     <div class="slider">
       <p>L</p>
-      <input id="range4" type="range" min="1" max="50" value="5" oninput="rangeValue4.innerText = this.value">
-      <p class="right" id="rangeValue4">5</p>
+      <input id="L" type="range" min="1" max="50" value="5">
+      <p class="right" id="rangeL">5</p>
     </div>
   </div>
   <script type="text/javascript" src="anim.js"></script>

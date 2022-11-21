@@ -127,6 +127,8 @@ document.getElementById("start").onclick = function () {
 
 document.getElementById("stop").onclick = function () {
     clearInterval(refresh);
+    my_chart.data.datasets.data = arr
+    my_chart.update()
 };
 
 document.getElementById("graph").onclick = function () {

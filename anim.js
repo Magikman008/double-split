@@ -1,7 +1,5 @@
 var elem = document.getElementById('draw-animation');
-var refresh = window.setInterval(add, 1000 / document.getElementById("speed").value);
-
-clearInterval(refresh);
+var refresh = null;
 
 var line_color = "black";
 var dot_color = "white";
@@ -141,29 +139,30 @@ document.getElementById("graph").onclick = function () {
 
 document.getElementById("speed").oninput = function () {
     clearInterval(refresh);
-    // rangeSpeed.innerText = Math.round(this.value / 10);
-    var temp = Math.round(this.value / 10);
-    rangeSpeedt.value = temp;
-    refresh = window.setInterval(add, 1000 / temp);
+    rangeSpeed.value = Math.round(this.value / 10);
+    refresh = window.setInterval(add, 1000 / Math.round(this.value / 10));
 }
 
-document.getElementById("rangeSpeedt").onchange = function () {
-    this.style["outline"] = "0";
-    clearInterval(refresh);
-    rangeSpeedt.value = Math.floor(this.value);
-
-    if (this.value == 0 || this.value > 30) {
-        this.style["outline"] = "2px solid red";
-    }
-    else {
-        speed.value = this.value * 10;
+document.getElementById("rangeSpeed").onchange = function () {
+    if (validation(document.getElementById("rangeSpeed"), speed) == 1)
+    {
+        clearInterval(refresh);
         refresh = window.setInterval(add, 1000 / Math.round(this.value));
     }
+    else 
+        clearInterval(refresh);
 }
 
-document.getElementById("rangeSpeedt").addEventListener("focus", function () {
-    this.style["outline"] = "0";
-});
+function validation(numberid, rangeid) {
+    if (numberid.value < numberid.min || numberid.value > numberid.max) {
+        return 0;
+    }
+    else {
+        rangeid.value = Math.floor(numberid.value);
+        speed.value = numberid.value * 10;
+        return 1;
+    }
+}
 
 document.getElementById("dist").oninput = function () {
     rangeDist.innerText = this.value

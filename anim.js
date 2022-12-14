@@ -1,4 +1,6 @@
 var elem = document.getElementById('draw-animation');
+// window.location.href = 'https://proxy.bmstu.ru:8443/cas/login?service=http://127.0.0.1:5501/';
+
 var refresh = window.setInterval(add, 1000 / document.getElementById("speed").value);
 
 clearInterval(refresh);

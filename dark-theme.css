@@ -41,6 +41,14 @@ body {
 
 .interface,
 .interface button,
-.theme {
+.theme,
+input[type="number"],
+a,
+a:visited {
     color: white;
+}
+
+input[type="number"] {
+    background: #1e1e1e;
+    outline: 2px solid var(--dark-outline);
 }

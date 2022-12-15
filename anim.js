@@ -18,9 +18,9 @@ var centerY = 350;
 
 var serifs = Array();
 
-var lineup = two.makeLine(200, 0, 200, centerY - 40 + distance / 3);
-var linecenter = two.makeLine(200, centerY - 20 + distance / 3, 200, centerY + 20 - distance / 3);
-var linedown = two.makeLine(200, centerY + 40 - distance / 3, 200, centerY * 2);
+var lineup = two.makeLine(200, 0, 200, centerY - 20 - distance / 3);
+var linecenter = two.makeLine(200, centerY + distance / 3, 200, centerY - distance / 3);
+var linedown = two.makeLine(200, centerY + 20 + distance / 3, 200, centerY * 2);
 var linewhole = two.makeLine(900, 0, 900, centerY * 2);
 
 styleLine(linedown);
@@ -41,25 +41,25 @@ var i = 0;
 two
     .bind('update', function (frameCount) {
         for (var j = 0; j < i; j++) {
-            if (dots[j].position.x < 200) {
+            if (dots[j].position.x < 197) {
                 if (holes[j] == 1) {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 350 + (15 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) + 15 - distance / 6;
+                    dots[j].position.y = 350 - (distance / 2 + 5) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) - distance / 2 - 5;
                 }
                 else {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 350 - (15 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) - 15 + distance / 6;
+                    dots[j].position.y = 350 + (distance / 2 + 5) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) + distance / 2 + 5;
                 }
             }
             else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
+            // else if (dots[j].position.x < 500) {
                 if (holes[j] == 1) {
                     dots[j].position.x += 4;
-                    // dots[j].position.y = 380 + (cords[j] - 330 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 200) / (dict_poins[String(j)][0] + 850 - y) - 1 / 2)) + 15 - distance / 6;
-                    dots[j].position.y = 380 - distance / 3 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
+                    dots[j].position.y = 340 - distance - (cords[j] / 20) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 300 - 1 / 2)) - cords[j] / 20;
                 }
                 else {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 320 + distance / 3 + (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
+                    dots[j].position.y = 360 + distance + (cords[j] / 20) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 300) - 1 / 2) + cords[j] / 20;
                 }
             }
         }
@@ -68,117 +68,15 @@ two
         linecenter.remove();
         linedown.remove();
 
-        lineup = two.makeLine(200, 0, 200, centerY - 40 + distance / 3);
-        linecenter = two.makeLine(200, centerY - 20 + distance / 3, 200, centerY + 20 - distance / 3);
-        linedown = two.makeLine(200, centerY + 40 - distance / 3, 200, centerY * 2);
+        lineup = two.makeLine(200, 0, 200, centerY - 20 - distance);
+        linecenter = two.makeLine(200, centerY + distance, 200, centerY - distance);
+        linedown = two.makeLine(200, centerY + 20 + distance, 200, centerY * 2);
 
         styleLine(linecenter);
         styleLine(lineup);
         styleLine(linedown);
     })
     .play();
-
-document.getElementById("Sphere").onclick = add;
-
-var y = 100
-var x = 650
-
-// var last_id = 0
-var eps = 0.001
-
-
-// ввод параметров
-var d_del_lambda = 5;
-var L = 5;
-var distance = 10;
-
-function add() {
-    dots.push(two.makeCircle(50 + L, centerY, 3));
-    dots[i].fill = dot_color;
-    dots[i].stroke = dot_stroke;
-    var slot = Math.round(1 - 0.5 + Math.random() * (2));
-    if (slot == 1)
-        cords.push(interfernce_pattern_generator(1, x - distance, i));
-    else
-        cords.push(interfernce_pattern_generator(1 + distance, x, i));
-
-    holes.push(slot);
-    // cords.push(interfernce_pattern_generator(1, 650, i));
-    i++;
-};
-
-document.getElementById("clear").onclick = function () {
-    dots.forEach(element => {
-        element.remove();
-    });
-
-    dots.length = 0;
-    holes.length = 0;
-    cords.lengs = 0;
-    dict_poins.lengs = 0;
-    i = 0;
-    for (let i = 0; i < arr.length; i++)
-        arr[i] = 0;
-    my_chart.update();
-};
-
-document.getElementById("start").onclick = function () {
-    clearInterval(refresh);
-    refresh = window.setInterval(add, 1000 / document.getElementById("speed").value);
-};
-
-document.getElementById("stop").onclick = function () {
-    clearInterval(refresh);
-    my_chart.data.datasets.data = arr
-    my_chart.update()
-};
-
-document.getElementById("graph").onclick = function () {
-    my_chart.data.datasets.data = arr;
-    my_chart.update();
-};
-
-document.getElementById("speed").oninput = function () {
-    clearInterval(refresh);
-    rangeSpeed.value = Math.round(this.value / 10);
-    refresh = window.setInterval(add, 1000 / Math.round(this.value / 10));
-}
-
-document.getElementById("rangeSpeed").onchange = function () {
-    if (validation(document.getElementById("rangeSpeed"), speed) == 1)
-    {
-        clearInterval(refresh);
-        refresh = window.setInterval(add, 1000 / Math.round(this.value));
-    }
-    else 
-        clearInterval(refresh);
-}
-
-function validation(numberid, rangeid) {
-    if (numberid.value < numberid.min || numberid.value > numberid.max) {
-        return 0;
-    }
-    else {
-        rangeid.value = Math.floor(numberid.value);
-        speed.value = numberid.value * 10;
-        return 1;
-    }
-}
-
-document.getElementById("dist").oninput = function () {
-    rangeDist.innerText = this.value
-    distance = this.value
-}
-
-document.getElementById("dlamb").oninput = function () {
-    rangeDlamb.innerText = Math.round(this.value / 10);
-    d_del_lambda = Math.round(this.value / 10);
-}
-
-document.getElementById("L").oninput = function () {
-    rangeL.innerText = this.value
-    L = Number(this.value);
-}
 
 function make_serifs() {
     styleLine(linewhole);

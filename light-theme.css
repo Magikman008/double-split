@@ -12,11 +12,13 @@ body {
     background-color: var(--light-accent);
 }
 
-.button, .theme {
+.button,
+.theme {
     background: var(--light-accent);
 }
 
-.button:hover, .theme:hover {
+.button:hover,
+.theme:hover {
     background: var(--light-hover);
 }
 
@@ -38,6 +40,15 @@ body {
 }
 
 .interface,
-.interface button, .theme {
+.interface button,
+.theme,
+input[type="number"],
+a,
+a:visited {
     color: black;
+}
+
+input[type="number"] {
+    background: #fbfbfb;
+    outline: 2px solid var(--light-outline);
 }

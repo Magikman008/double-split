@@ -51,15 +51,15 @@ two
                     dots[j].position.y = 350 + (distance / 2 + 5) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) + distance / 2 + 5;
                 }
             }
-            else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
-            // else if (dots[j].position.x < 500) {
+            else if (dots[j].position.x < 900 - dict_poins[String(j)][0]) {
+                // else if (dots[j].position.x < 895) {
                 if (holes[j] == 1) {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 340 - distance - (cords[j] / 20) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 300 - 1 / 2)) - cords[j] / 20;
+                    dots[j].position.y = 340 - distance + ((340 - distance - cords[j]) / 2) * Math.sin(Math.PI * ((dots[j].position.x - 200) / (700 - dict_poins[String(j)][0]) - 1 / 2)) + (340 - distance - cords[j]) / 2;
                 }
                 else {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 360 + distance + (cords[j] / 20) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 300) - 1 / 2) + cords[j] / 20;
+                    dots[j].position.y = 360 + distance - ((360 + distance - cords[j]) / 2) * Math.sin(Math.PI * ((dots[j].position.x - 200) / (700 - dict_poins[String(j)][0]) - 1 / 2)) - (360 + distance - cords[j]) / 2;
                 }
             }
         }

@@ -17,12 +17,12 @@ function add() {
     dots[i].stroke = dot_stroke;
     var slot = Math.round(1 - 0.5 + Math.random() * (2));
     // cords.push(Math.random() * (900 - 0) + 0);
-    // console.log(cords[i]);
     if (slot == 1)
         cords.push(interfernce_pattern_generator(1, x - distance, i));
     else
         cords.push(interfernce_pattern_generator(1 + distance, x, i));
 
+    // console.log(dict_poins[String(i)][0]);
     holes.push(slot);
     // cords.push(interfernce_pattern_generator(1, 650, i));
     i++;

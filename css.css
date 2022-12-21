@@ -5,7 +5,7 @@ body {
 
 .chart {
     transform-origin: bottom left;
-    transform: translateY(-350px) rotate(90deg) translateX(-20px);
+    transform: translateY(-350px) rotate(90deg) translateX(0px);
 }
 
 .canvases {
@@ -36,6 +36,7 @@ body {
     height: 40px;
     transition: .2s linear;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .lang {
@@ -62,6 +63,7 @@ a:visited {
     margin-right: 10px;
     margin-bottom: 10px;
     line-height: 29px;
+    cursor: pointer;
 }
 
 .interface {

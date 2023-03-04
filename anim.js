@@ -1,7 +1,6 @@
 var elem = document.getElementById('draw-animation');
-var refresh = window.setInterval(add, 1000 / document.getElementById("range").value);
-
-clearInterval(refresh);
+// window.location.href = 'https://proxy.bmstu.ru:8443/cas/login?service=http://127.0.0.1:5501/';
+var refresh = null;
 
 var line_color = "black";
 var dot_color = "white";
@@ -19,9 +18,9 @@ var centerY = 350;
 
 var serifs = Array();
 
-var lineup = two.makeLine(200, 0, 200, centerY - 40 + distance / 3);
-var linecenter = two.makeLine(200, centerY - 20 + distance / 3, 200, centerY + 20 - distance / 3);
-var linedown = two.makeLine(200, centerY + 40 - distance / 3, 200, centerY * 2);
+var lineup = two.makeLine(200, 0, 200, centerY - 20 - distance / 3);
+var linecenter = two.makeLine(200, centerY + distance / 3, 200, centerY - distance / 3);
+var linedown = two.makeLine(200, centerY + 20 + distance / 3, 200, centerY * 2);
 var linewhole = two.makeLine(900, 0, 900, centerY * 2);
 
 styleLine(linedown);
@@ -42,24 +41,25 @@ var i = 0;
 two
     .bind('update', function (frameCount) {
         for (var j = 0; j < i; j++) {
-            if (dots[j].position.x < 200) {
+            if (dots[j].position.x < 197) {
                 if (holes[j] == 1) {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 350 + (15 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) + 15 - distance / 6;
+                    dots[j].position.y = 350 - (distance / 2 + 5) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) - distance / 2 - 5;
                 }
                 else {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 350 - (15 - distance / 6) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) - 15 + distance / 6;
+                    dots[j].position.y = 350 + (distance / 2 + 5) * Math.sin(Math.PI * ((dots[j].position.x - 50 - L) / (150 - L) - 1 / 2)) + distance / 2 + 5;
                 }
             }
-            else if (dots[j].position.x < dict_poins[String(j)][0] + 850 - y) {
+            else if (dots[j].position.x < 870 - dict_poins[String(j)][0]) {
+                // else if (dots[j].position.x < 895) {
                 if (holes[j] == 1) {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 380 - distance / 3 - (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
+                    dots[j].position.y = 340 - distance + ((350 - distance - cords[j]) / 2) * Math.sin(Math.PI * ((dots[j].position.x - 200) / (670 - dict_poins[String(j)][0]) - 1 / 2)) + (350 - distance - cords[j]) / 2;
                 }
                 else {
                     dots[j].position.x += 4;
-                    dots[j].position.y = 320 + distance / 3 + (cords[j] - 330) * Math.sin(Math.PI * ((dots[j].position.x - 200) / 1400));
+                    dots[j].position.y = 360 + distance - ((350 + distance - cords[j]) / 2) * Math.sin(Math.PI * ((dots[j].position.x - 200) / (670 - dict_poins[String(j)][0]) - 1 / 2)) - (350 + distance - cords[j]) / 2;
                 }
             }
         }
@@ -68,90 +68,15 @@ two
         linecenter.remove();
         linedown.remove();
 
-        lineup = two.makeLine(200, 0, 200, centerY - 40 + distance / 3);
-        linecenter = two.makeLine(200, centerY - 20 + distance / 3, 200, centerY + 20 - distance / 3);
-        linedown = two.makeLine(200, centerY + 40 - distance / 3, 200, centerY * 2);
+        lineup = two.makeLine(200, 0, 200, centerY - 20 - distance);
+        linecenter = two.makeLine(200, centerY + distance, 200, centerY - distance);
+        linedown = two.makeLine(200, centerY + 20 + distance, 200, centerY * 2);
 
         styleLine(linecenter);
         styleLine(lineup);
         styleLine(linedown);
     })
     .play();
-
-document.getElementById("Sphere").onclick = add;
-
-var y = 100
-var x = 650
-
-// var last_id = 0
-var eps = 0.001
-
-
-// ввод параметров
-var d_del_lambda = 5;
-var L = 5;
-var distance = 10;
-
-function add() {
-    dots.push(two.makeCircle(50 + L, centerY, 3));
-    dots[i].fill = dot_color;
-    dots[i].stroke = dot_stroke;
-    var slot = Math.round(1 - 0.5 + Math.random() * (2));
-    if (slot == 1)
-        cords.push(interfernce_pattern_generator(1, x - distance, i));
-    else
-        cords.push(interfernce_pattern_generator(1 + distance, x, i));
-
-    holes.push(slot);
-    // cords.push(interfernce_pattern_generator(1, 650, i));
-    i++;
-};
-
-document.getElementById("clear").onclick = function () {
-    dots.forEach(element => {
-        element.remove();
-    });
-
-    dots.length = 0;
-    holes.length = 0;
-    cords.lengs = 0;
-    dict_poins.lengs = 0;
-    i = 0;
-};
-
-document.getElementById("start").onclick = function () {
-    clearInterval(refresh);
-    refresh = window.setInterval(add, 1000 / document.getElementById("range").value);
-};
-
-document.getElementById("stop").onclick = function () {
-    clearInterval(refresh);
-};
-
-// document.getElementById("graph").onclick = function () {
-//     console.log(arr)
-// };
-
-document.getElementById("range").oninput = function () {
-    clearInterval(refresh);
-    rangeValue.innerText = this.value
-    refresh = window.setInterval(add, 1000 / this.value);
-}
-
-document.getElementById("range2").oninput = function () {
-    rangeValue2.innerText = this.value
-    distance = this.value
-}
-
-document.getElementById("range3").oninput = function () {
-    rangeValue3.innerText = this.value
-    d_del_lambda = this.value
-}
-
-document.getElementById("range4").oninput = function () {
-    rangeValue4.innerText = this.value
-    L = Number(this.value);
-}
 
 function make_serifs() {
     styleLine(linewhole);

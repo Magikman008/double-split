@@ -1,37 +1,54 @@
+:root {
+    --light-accent: #eceef0;
+    --light-hover: #dddfe5;
+    --light-outline: black;
+}
+
 body {
     background-color: #fbfbfb;
 }
 
 #draw-animation {
-    background-color: lightblue;
+    background-color: var(--light-accent);
 }
 
-.button, .theme {
-    background: #eceef0;
+.button,
+.theme {
+    background: var(--light-accent);
 }
 
-.button:hover, .theme:hover {
-    background: #dddfe5;
+.button:hover,
+.theme:hover {
+    background: var(--light-hover);
 }
 
 .slider {
-    background: #eceef0;
+    background: var(--light-accent);
 }
 
 .slider input[type="range"] {
-    background: black;
+    background: var(--light-outline);
 }
 
 .slider input[type="range"]::-webkit-slider-thumb {
-    background: white;
-    border: 2px solid black;
+    background: #fbfbfb;
+    border: 2px solid var(--light-outline);
 }
 
 .slider input[type="range"]::-webkit-slider-thumb:hover {
-    background: gray;
+    background: var(--light-hover);
 }
 
 .interface,
-.interface button, .theme {
+.interface button,
+.theme,
+input[type="number"],
+a,
+a:visited {
     color: black;
+}
+
+input[type="number"] {
+    background: #fbfbfb;
+    outline: 2px solid var(--light-outline);
 }
